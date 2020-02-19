@@ -43,8 +43,8 @@ int main() {
 //(p3->n())->g(); 
 //(p3->n())->n()->g();
 //(p5->n())->g(); 
-(p5->n())->m(); 
+//(p5->n())->m(); 
 //(dynamic_cast<B*>(p2))->m(); 
 //(static_cast<C*>(p3))->k();
-//( static_cast<B*>(p3->n()) )->g(); 
+( static_cast<B*>(p3->n()) )->g(); 
 }
