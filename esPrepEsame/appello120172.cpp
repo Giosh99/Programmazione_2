@@ -1,117 +1,64 @@
-#include <iostream>
-using std::endl;
-using std::cout;
-using namespace std;
-class A
-{
-protected:
-    virtual void r() { cout << " A::r "; }
+#include<iostream>
+using std::cout; using std::endl; 
 
-public:
-    virtual void g() const { cout << " A::g "; }
-    virtual void f()
-    {
-        cout << " A::f ";
-        g();
-        r();
-    }
-    void m()
-    {
-        cout << " A::m ";
-        g();
-        r();
-    }
-    virtual void k()
-    {
-        cout << " A::k ";
-        r();
-        m();
-    }
-     A *n()
-    {
-        cout << " A::n ";
-        return this;
-    }
+class A {
+    protected:
+        virtual void h(){ cout << "A::h ";}
+    public:
+        virtual void g() const {cout << "A::g ";} 
+        virtual void f() {cout << "A::f "; g(); h();}
+        void m() {cout<< "A::m "; g(); h();}
+        virtual void k() {cout << "A::k "; h(); m();}
+        virtual A* n() {cout << "A::n "; return this;}
 };
 
-class B : public A
-{
-public:
-    virtual void g() const { cout << " B::g "; }
-    virtual void m()
-    {
-        cout << " B::m ";
-        g();
-        r();
-    }
-    void k()
-    {
-        cout << " B::k ";
-        A::n();
-    }
-    A *n()
-    {
-        cout << " B::n ";
-        return this;
-    }
-};
-class C : public A
-{
-protected:
-    void r() { cout << " C::r "; }
-
-public:
-    virtual void g() { cout << " C::g "; }
-    void m()
-    {
-        cout << " C::m ";
-        g();
-        r();
-    }
-    void k() const
-    {
-        cout << " C::k ";
-        k();
-    }
+class B : public A {
+    protected:
+        virtual void h(){ cout << "B::h ";}
+    public:
+        virtual void g() {cout << "B::g ";} 
+        void m() {cout<< "B::m "; g(); h();}
+        void k() {cout << "B::k "; g(); h();}
+        B* n() {cout << "B::n "; return this;}
 };
 
-class D : public B
-{
-protected:
-    void r() { cout << " D::r "; }
-
-public:
-    B *n()
-    {
-        cout << " D::n ";
-        return this;
-    }
-    void m()
-    {
-        cout << " D::m ";
-        g();
-        r();
-    }
+class C : public B {
+    protected:
+        virtual void h() const { cout << "C::h ";}
+    public:
+        virtual void g() {cout << "C::g ";} 
+        void m() {cout<< "C::m "; g(); k();}
+        void k() const {cout << "C::k "; h();}
 };
-A *p1 = new D();
-A *p2 = new B();
-A *p3 = new C();
-B *p4 = new D();
-const A *p5 = new C();
 
-int main()
-{
-    //p1->k();
-    //p2->f();
-    //p2->m();
-    //p3->k();
-    //p3->f();
-    //p5->g();
-    //(p3->n())->m();
-    //(p3->n())->n()->g();
-    //cout<<typeid((p4)).name()<<endl;
-    p4->n();
-    //(p5->n())->g();
-    //(dynamic_cast<B *>(p1))->m();
-    //(static_cast<C *>(p2))->k();
-}//
+int main(){ 
+    A* p2 = new B();
+    A* p3 = new C();
+    B* p4 = new B();
+    B* p5 = new C();
+    const A* p6 = new C();
+
+   // p2->f(); cout << endl;
+   // p2->m(); cout << endl;
+    //p3->k(); cout << endl;
+//
+   // p3->f(); cout << endl;
+   // p4->m();cout << endl;
+   // p4->k();cout << endl;
+//
+   // p4->g(); cout << endl;
+   // p5->g(); cout << endl;
+   // //p6->k(); //non compila
+//
+   // p6->g(); cout << endl;
+   // (p3->n())->m(); cout << endl;
+   // (p3->n())->g(); cout << endl;
+//
+   // ((p3->n())->n())->g(); cout << endl;
+   // (p5->n())->g(); cout << endl;
+   // (p5->n())->m(); cout << endl;
+//
+   // (dynamic_cast<B*>(p2))->m(); cout << endl;
+   // (static_cast<C*>(p3))->k(); cout << endl;
+    (static_cast<B*>(p3->n()))->g(); cout << endl;
+}

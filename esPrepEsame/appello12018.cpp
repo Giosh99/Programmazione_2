@@ -37,7 +37,20 @@ void m() { cout <<" D::m "; g(); j(); }
  class E : public A{}; 
  int main() {
      A*p1 = new D(); A*p2 = new B(); A*p3 = new C(); B*p4 = new D(); const A*p5 = new C();
-     (static_cast<B*>(p3->n()))->g();
-     cout<<" "<<endl;
-     cout<<typeid(*static_cast<B*>(p3->n())).name();
+//p1->g(); 
+//p1->k(); 
+//p2->f(); 
+//p2->m(); 
+//p3->k(); 
+//p3->f(); 
+//p4->m(); 
+//p4->k(); 
+//p5->g(); 
+//(p3->n())->m(); 
+//(p3->n())->n()->g(); 
+//(p4->n())->m(); 
+//(p5->n())->g(); 
+//(dynamic_cast<B*>(p1))->m();
+(static_cast<C*>(p2))->k(); 
+//(static_cast<B*>(p3->n()))->g(); 
  }
