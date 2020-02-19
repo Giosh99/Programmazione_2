@@ -4,14 +4,13 @@ using std::endl;
 int main();
 template <class T=double> 
 class coda{
-    friend int main();
     class nodo{
         public:
         T value;
         nodo* next;
         nodo* prev;
         nodo(): prev(0), next(0){}
-        nodo(const T& v, nodo*n=0, nodo*p=0): value(v), next(n), prev(p) {}
+        nodo(const T& v=T(), nodo*n=0, nodo*p=0): value(v), next(n), prev(p) {}
         ~nodo() {
             delete next;
         }
@@ -111,16 +110,23 @@ class coda{
     }
 };
 int main() {
-    //coda<int> c1(5,5);
-   // coda<int> c2(5,6);
-    //<int> result = c1+c2;
     coda<int> c3;
     c3.insert(1);
     c3.insert(2);
     c3.insert(3);
     c3.insert(4);
-    for(coda<int>::const_iterator it = c3.begin(); it!=c3.end(); ) {
-        cout<<"ok"<<endl;
+    /*for(coda<int>::const_iterator it = c3.begin(); it!=c3.end(); ) {
+        cout<<*it<<endl;
+        ++it;
+    }*/
+    coda<int> c2;
+    c2.insert(5);
+    c2.insert(6);
+    c2.insert(7);
+    c2.insert(8);
+    coda<int> sum = c3+c2;
+
+    for(coda<int>::const_iterator it = sum.begin(); it!=sum.end(); ) {
         cout<<*it<<endl;
         ++it;
     }
