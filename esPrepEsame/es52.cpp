@@ -8,11 +8,9 @@ class D: public B {};
 class E: public C {};
 int Fun(vector<B*> &v){
     int a = 0;
-    for(int i =0; i<v.size();i++){
-        if(typeid(C)!=typeid(v[i]) && dynamic_cast<C*>(v[i]) && typeid(*v[0])!=typeid(*v[i]))
-            a++;
-    }   
-    return a;
+    for(int i = 0; i<v.size();i++) {
+        if(dynamic_cast<C*>(v[i])&&typeid(v[i])!=typeid(C))
+    }
 }
 main() {
 vector<B*> u, v, w;
