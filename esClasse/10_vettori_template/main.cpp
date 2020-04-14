@@ -1,4 +1,5 @@
 #include "vettori.h"
+#include "vettori.cpp"
 #include <iostream>
 using namespace std;
 
